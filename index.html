@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaXaY Арбитраж</title>
+    <style>
+        /* Основные стили */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #3d3bff, #00b4d8);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 12px 24px;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            background-color: #fff;
+            color: #3d3bff;
+            transform: scale(1.1);
+        }
+
+        main {
+            padding: 50px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .button {
+            background-color: #3d3bff;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #00b4d8;
+            transform: scale(1.1);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px 30px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Медиазапрос для мобильных устройств (экран до 480px) */
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            nav a {
+                font-size: 1rem;
+                padding: 10px 20px;
+                width: 100%;
+                text-align: left;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 15px;
+                margin: 20px 0;
+            }
+
+            .button {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+
+            footer {
+                padding: 10px 15px;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+
+            .card img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        /* Медиазапрос для планшетов (экран до 768px) */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .card {
+                padding: 20px;
+                margin: 20px 0;
+            }
+
+            .button {
+                padding: 14px 28px;
+                font-size: 1.1rem;
+            }
+
+            footer {
+                padding: 12px 20px;
+            }
+
+            footer p {
+                font-size: 1rem;
+            }
+
+            .card img {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Медиазапрос для экранов от 1024px */
+        @media (min-width: 1024px) {
+            body {
+                font-size: 18px;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                gap: 25px;
+            }
+
+            nav a {
+                font-size: 1.2rem;
+                padding: 12px 24px;
+            }
+
+            .container {
+                max-width: 1200px;
+                padding: 30px;
+            }
+
+            .card {
+                padding: 25px;
+                margin: 30px 0;
+            }
+
+            .button {
+                padding: 16px 32px;
+                font-size: 1.2rem;
+            }
+
+            footer {
+                padding: 15px 30px;
+            }
+
+            footer p {
+                font-size: 1.1rem;
+            }
+
+            .card img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>MaXaY Арбитраж</h1>
+        <nav>
+            <a href="#" onclick="showPage('main-page')">Главная</a>
+            <a href="#" onclick="showPage('ideas-page')">Идеи</a>
+            <a href="#" onclick="showPage('base-page')">База</a>
+            <a href="#" onclick="showPage('publications-page')">Публикации</a>
+        </nav>
+    </header>
+    
+    <main id="main-page" class="container">
+        <h2>Добро пожаловать в MaXaY Арбитраж</h2>
+        <p>MaXaY Арбитраж — это инновационная платформа...</p>
+        <div class="card">
+            <h3>Ваш профиль</h3>
+            <p>Никнейм: <strong>Maxim</strong></p>
+            <p>
+                Аккаунты: 
+                <em>Telegram</em> 
+                <a href="https://telegram.org/">
+                    <img width="40" height="40" src="https://img.icons8.com/color/40/telegram-app.png" alt="telegram-app"/>
+                </a>
+                <em>TikTok</em> 
+                <a href="https://www.tiktok.com/">
+                    <img width="40" height="40" src="https://img.icons8.com/color/40/tiktok--v1.png" alt="tiktok--v1"/>
+                </a>
+            </p>
+            <button class="button">Настроить профиль</button>
+        </div>
+    </main>
+    
+    <main id="ideas-page" class="container hidden fade-in">
+        <h2>Идеи</h2>
+        <div class="card">
+            <h3>Идея 1</h3>
+            <p>Разработка новых методов оптимизации арбитража трафика.</p>
+        </div>
+        <div class="card">
+            <h3>Идея 2</h3>
+            <p>Автоматизация процесса публикации контента на различных платформах.</p>
+        </div>
+    </main>
+
+    <main id="base-page" class="container hidden fade-in">
+        <h2>База данных</h2>
+        <div class="card">
+            <h3>Загрузка видео</h3>
+            <input type="file" style="width: 100%; margin-top: 10px;">
+            <button class="button">Загрузить</button>
+        </div>
+        <div class="card">
+            <h3>Категории</h3>
+            <p>Текущие категории: Спорт, Юмор, Музыка, Обучение</p>
+            <button class="button">Добавить категорию</button>
+        </div>
+    </main>
+
+    <main id="publications-page" class="container hidden fade-in">
+        <h2>Публикации</h2>
+        <div class="card">
+            <h3>История публикаций</h3>
+            <ul>
+                <li>Видео 1: Спорт (21.12.2024)</li>
+                <li>Видео 2: Юмор (22.12.2024)</li>
+                <li>Видео 3: Обучение (23.12.2024)</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Настройки публикаций</h3>
+            <p>Управляйте расписанием публикаций и изменяйте их параметры.</p>
+            <button class="button">Настроить</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 MaXaY Арбитраж. Все права защищены.</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('main').forEach(page => page.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
