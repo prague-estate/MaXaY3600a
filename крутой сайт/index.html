@@ -1,0 +1,41 @@
+<div class="card">
+    <h3>Загрузка видео</h3>
+    <form id="videoUploadForm" enctype="multipart/form-data">
+        <input type="file" id="videoFile" name="video" accept="video/*" required>
+        <button type="submit" class="button">Загрузить</button>
+    </form>
+    <p id="uploadStatus"></p>
+</div>
+
+<script>
+    const uploadForm = document.getElementById('videoUploadForm');
+    const uploadStatus = document.getElementById('uploadStatus');
+
+    uploadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const fileInput = document.getElementById('videoFile');
+        const formData = new FormData();
+        formData.append('video', fileInput.files[0]);
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                uploadStatus.textContent = `Файл успешно загружен: ${result.file_path}`;
+                uploadStatus.style.color = 'green';
+            } else {
+                uploadStatus.textContent = `Ошибка: ${result.message}`;
+                uploadStatus.style.color = 'red';
+            }
+        } catch (error) {
+            console.error('Ошибка при загрузке файла:', error);
+            uploadStatus.textContent = 'Ошибка при загрузке файла.';
+            uploadStatus.style.color = 'red';
+        }
+    });
+</script>
